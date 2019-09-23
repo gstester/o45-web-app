@@ -1,0 +1,80 @@
+<div>
+  <div *ngFor="let costKey of costKeys">
+    <div>
+      {{costKey.year}}
+    </div>
+    <button mat-flat-button color="secondbtn" (click)="calculate(costKey)" class="app-detail-tabs">Calculate {{costKey.year}}</button>
+    <button mat-flat-button color="secondbtn" (click)="print(costKey)" class="app-detail-tabs">Print {{costKey.year}}</button>
+  </div>
+</div>
+<div>
+  <h2>Summary</h2>
+  <div>
+    <h4>Total:          {{total.toFixed(2)}}</h4>
+    <h4>TotalDifferenz: {{totalDifference.toFixed(2)}}</h4>
+    <h4>TotalVorschuss: {{totalUpfront.toFixed(2)}}</h4>
+    <h4>Total Heizung:  {{totalHeating.toFixed(2)}}</h4>
+    <h4>Total Wasser:   {{totalWater.toFixed(2)}}</h4>
+    <h4>Test: {{(total - totalUpfront + totalDifference).toFixed(2)}}</h4>
+    
+  </div>
+  <div *ngFor="let entry of summary$ | async">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{entry.Lage}}</mat-card-title>
+        <mat-card-subtitle>{{entry.Namen}}</mat-card-subtitle>
+        <h4>Gesamtsumme: {{entry.pSummeGesamt}}, Differenz: {{(entry.SummeGesamt - entry.SummeGezahlt).toFixed(2)}}, D: {{(entry.DifferenzVerbrauchskosten + entry.DifferenzGrundkosten).toFixed(2)}}</h4>
+      </mat-card-header>
+      <mat-card-content>
+        <table cellpadding="5" cellspacing="5" width="400px;">
+          <thead>
+            <tr>
+              <th>Art</th>
+              <th>Grundkosten</th>
+              <th>Verbrauch</th>
+              <th>Summe</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>Kosten</td>
+            <td class="price">{{entry.Grundkosten}} €</td>
+            <td class="price">{{entry.Verbrauchskosten}} €</td>
+            <td class="price">{{0}} €</td>
+          </tr>
+          <tr>
+            <td>Gezahlt</td>
+            <td class="price">{{entry.GrundkostenGezahlt}} €</td>
+            <td class="price">{{entry.VerbrauchskostenGezahlt}} €</td>
+            <td class="price">{{entry.pSummeGezahlt}} €</td>
+          </tr>
+          <tr>
+            <td>Heizung</td>
+            <td class="price">{{entry.HeizungGrundkosten}} €</td>
+            <td class="price">{{entry.pHeizungVerbrauchskosten}} €</td>
+            <td class="price">{{entry.pSummeHeizung}} €</td>
+          </tr>
+          <tr>
+            <td>Wasser</td>
+            <td class="price">{{entry.WasserGrundkosten}} €</td>
+            <td class="price">{{entry.pWasserVerbrauchskosten}} €</td>
+            <td class="price">{{entry.pSummeWasser}} €</td>
+          </tr>
+          <tr>
+            <td>Differenz</td>
+            <td class="price">{{entry.DifferenzGrundkosten}} €</td>
+            <td class="price">{{entry.pDifferenzVerbrauchskosten}} €</td>
+            <td class="price">{{(entry.DifferenzVerbrauchskosten + entry.DifferenzGrundkosten).toFixed(2)}} €</td>
+          </tr>
+          <tfoot>
+            <tr>
+              <td colspan="2">
+                <h4>{{entry.SchlussSatz}}</h4>
+              </td>
+              <td class="price">{{entry.pSummeGesamt}} €</td>
+            </tr>
+          </tfoot>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

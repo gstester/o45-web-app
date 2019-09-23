@@ -1,0 +1,35 @@
+<div>
+  <form [formGroup]="detailGroup" (ngSubmit)="add()" fxLayout="column">
+    <div [hidden]="true">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Id" formControlName="id">
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+      <mat-label>Jahr/Kostenschlüssel</mat-label>
+      <mat-select formControlName="costKey" placeholder="Kostenschlüssel" [compareWith]="compare">
+        <mat-option *ngFor="let c of costKeys" [value]="c">
+          {{c.year}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Wohneinheit</mat-label>
+      <mat-select formControlName="flat" placeholder="Wohneinheit" [compareWith]="compare">
+        <mat-option *ngFor="let f of flats" [value]="f">
+          {{f.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" step="0.001" placeholder="Heizung Verbrauch" formControlName="heating">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" step="0.001" placeholder="Wasser Verbrauch" formControlName="water">
+    </mat-form-field>
+  </form>
+</div>
+<div>
+  <button mat-flat-button color="secondbtn" (click)="add()" class="app-detail-tabs">Save</button>
+  <button mat-flat-button color="secondbtn" (click)="close()" class="app-detail-tabs">Close</button>
+</div>

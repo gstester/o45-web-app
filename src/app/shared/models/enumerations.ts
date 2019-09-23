@@ -1,0 +1,1 @@
+export enum ViewType { Tenant = 'Tenant', Flat = 'Flat', Usage = 'Usage', CostKey = 'CostKey', Summary = 'Summary', Wellcome = 'Wellcome'}

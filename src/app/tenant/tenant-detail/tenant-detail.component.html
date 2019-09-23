@@ -1,0 +1,31 @@
+<div>
+  <form [formGroup]="detailGroup" (ngSubmit)="add()" fxLayout="column">
+    <div [hidden]="true">
+      <mat-form-field >
+          <input matInput type="text" placeholder="Id" formControlName="id" > 
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Name" formControlName="name"> 
+    </mat-form-field>
+
+      <mat-checkbox formControlName="isChild" style="padding:0.4375em 0;">Kind</mat-checkbox>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="pickerMoveIn" placeholder="MoveIn" formControlName="moveIn">
+      <mat-datepicker-toggle matSuffix [for]="pickerMoveIn"></mat-datepicker-toggle>
+      <mat-datepicker #pickerMoveIn></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="pickerMoveOut" placeholder="MoveOut" formControlName="moveOut">
+      <mat-datepicker-toggle matSuffix [for]="pickerMoveOut"></mat-datepicker-toggle>
+      <mat-datepicker #pickerMoveOut></mat-datepicker>
+    </mat-form-field>
+
+    <flat-assignment [tenantId]="tenantId" [flats]="flats" (flatChange)="onFlatChange($event)"></flat-assignment>
+  </form>
+</div>
+<div>
+  <button mat-flat-button color="secondbtn" (click)="add()" class="app-detail-tabs">Save</button>
+  <button mat-flat-button color="secondbtn" (click)="close()" class="app-detail-tabs">Close</button>
+</div>

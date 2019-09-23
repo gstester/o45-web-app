@@ -1,0 +1,24 @@
+<div class="main">
+  <ng-container>
+    <mat-toolbar class="example-header">
+      <a [routerLink]="'.'">O45 Heizkosten</a></mat-toolbar>
+
+    <mat-sidenav-container class="example-container">
+      <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="false">
+        <mat-button-toggle-group name="example" aria-label="example" vertical>
+          <mat-button-toggle (click)="navigate(flat)">Wohneinheiten</mat-button-toggle>
+          <mat-button-toggle (click)="navigate(tenant)">Mieter</mat-button-toggle>
+          <mat-button-toggle (click)="navigate(costKey)">Kostenschlüssel</mat-button-toggle>
+          <mat-button-toggle (click)="navigate(usage)">Verbrauch</mat-button-toggle>
+          <mat-button-toggle (click)="navigate(summary)">Abrechung</mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-sidenav>
+
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+
+    <mat-toolbar class="example-footer">Footer</mat-toolbar>
+  </ng-container>
+</div>

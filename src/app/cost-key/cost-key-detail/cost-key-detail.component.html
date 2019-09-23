@@ -1,0 +1,62 @@
+<div>
+  <form [formGroup]="detailGroup" (ngSubmit)="add()" fxLayout="column">
+    <div [hidden]="true">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Id" formControlName="id">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <input matInput type="number" placeholder="Jahr" formControlName="year">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="from" placeholder="From" formControlName="from">
+      <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+      <mat-datepicker #from></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="to" placeholder="To" formControlName="to">
+      <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+      <mat-datepicker #to></mat-datepicker>
+    </mat-form-field>
+    <div>
+      <mat-form-field>
+        <input matInput type="number" step="0.001" placeholder="Heizung GrundKosten" formControlName="heatingBasisCostKey">
+      </mat-form-field>
+      <mat-form-field style="margin-left: 20px;">
+        <input matInput type="number" step="0.001" placeholder="Heizung Verbrauchskosten" formControlName="heatingUsageCostKey">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput type="number" step="0.001" placeholder="Wasser GrundKosten" formControlName="waterBasisCostKey">
+      </mat-form-field>
+      <mat-form-field style="margin-left: 20px;">
+        <input matInput type="number" step="0.001" placeholder="Wasser Verbrauchskosten" formControlName="waterUsageCostKey">
+      </mat-form-field>
+    </div>
+    <div formArrayName="upfrontPayments"
+      *ngFor="let payment of detailGroup.get('upfrontPayments').controls; let i = index" style="margin-top:30px;">
+      <div [formGroupName]="i">
+        <mat-form-field>
+          <mat-label>Typ</mat-label>
+          <mat-select formControlName="type" placeholder="Typ">
+            <mat-option *ngFor="let t of flatTypes" [value]="t">
+              {{t}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field style="margin-left: 20px;">
+          <input matInput type="number" step="0.01" placeholder="GrundKosten" formControlName="basis">
+        </mat-form-field>
+        <mat-form-field style="margin-left: 20px;">
+          <input matInput type="number" step="0.01" placeholder="VerbrauchsKosten" formControlName="usage">
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+<div>
+  <button mat-flat-button color="secondbtn" (click)="add()" class="app-detail-tabs">Save</button>
+  <button mat-flat-button color="secondbtn" (click)="close()" class="app-detail-tabs">Close</button>
+</div>

@@ -1,0 +1,8 @@
+<mat-form-field *ngIf="flats" appearance="outline">
+  <mat-select panelClass="qc-dark-theme" disableOptionCentering="true" placeholder="Flats" [(value)]="selectedFlat"
+    [compareWith]="flatCompare" (selectionChange)="selectionChange($event)">
+    <mat-option *ngFor="let f of flats" [value]="f">
+      {{f.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

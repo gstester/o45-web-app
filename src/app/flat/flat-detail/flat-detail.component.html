@@ -1,0 +1,55 @@
+<div>
+  <form [formGroup]="detailGroup" (ngSubmit)="add()" fxLayout="column">
+    <div [hidden]="true">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Name" formControlName="id">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field >
+        <input matInput type="text" placeholder="Name" formControlName="name">
+      </mat-form-field>
+      <mat-form-field style="margin-left: 20px;">
+        <input matInput placeholder="Beschreibung" formControlName="description">
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+      <mat-label>Typ</mat-label>
+      <mat-select placeholder="Typ" formControlName="type">
+        <mat-option *ngFor="let t of flatTypes" [value]="t">{{t}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Grundanteile" formControlName="basisParts">
+      </mat-form-field>
+    </div>
+    <mat-form-field class="example-full-width">
+      <mat-chip-list #chipList2 aria-label="Fruit selection">
+        <mat-chip *ngFor="let t of tenants" [selectable]="selectable" [removable]="removable"
+          (removed)="removeTenant(t)">
+          {{t.name}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input type="text" placeholder="Assignee" #myInput aria-label="Assignee" matInput [formControl]="myControl"
+          [matAutocomplete]="tenantComplete" [matChipInputFor]="chipList2"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="addTenant2($event)">
+      </mat-chip-list>
+      <mat-autocomplete #tenantComplete="matAutocomplete" [displayWith]="displayFnUser"
+        (optionSelected)="optionSelected($event)">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+
+
+
+  </form>
+</div>
+<div>
+  <button mat-flat-button color="secondbtn" (click)="save()" class="app-detail-tabs">Save</button>
+  <button mat-flat-button color="secondbtn" (click)="close()" class="app-detail-tabs">Close</button>
+</div>
