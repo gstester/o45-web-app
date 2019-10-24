@@ -26,7 +26,7 @@
         <h4>Gesamtsumme: {{entry.pSummeGesamt}}, Differenz: {{(entry.SummeGesamt - entry.SummeGezahlt).toFixed(2)}}, D: {{(entry.DifferenzVerbrauchskosten + entry.DifferenzGrundkosten).toFixed(2)}}</h4>
       </mat-card-header>
       <mat-card-content>
-        <table cellpadding="5" cellspacing="5" width="400px;">
+        <table cellpadding="5" cellspacing="5" width="800px;">
           <thead>
             <tr>
               <th>Art</th>
@@ -45,7 +45,7 @@
             <td>Gezahlt</td>
             <td class="price">{{entry.GrundkostenGezahlt}} €</td>
             <td class="price">{{entry.VerbrauchskostenGezahlt}} €</td>
-            <td class="price">{{entry.pSummeGezahlt}} €</td>
+            <td class="price">{{entry.SummeGezahlt}} €</td>
           </tr>
           <tr>
             <td>Heizung</td>
@@ -67,7 +67,7 @@
           </tr>
           <tfoot>
             <tr>
-              <td colspan="2">
+              <td colspan="3">
                 <h4>{{entry.SchlussSatz}}</h4>
               </td>
               <td class="price">{{entry.pSummeGesamt}} €</td>

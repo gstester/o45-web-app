@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatDialog, MatPaginator, MatSort } from '@angular/material';
 
 import { TenantService } from '../services/tenant.service';
@@ -9,6 +9,8 @@ import { TableComponentBase, CrudHandler } from '../shared/components/table-comp
 import { TenantDetailComponent } from './tenant-detail/tenant-detail.component';
 import { ITenant } from '../shared/models/tenant.dto'; 
 import { IFlat } from '../shared/models/flat.dto';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-tenant',
@@ -19,7 +21,7 @@ export class TenantComponent extends TableComponentBase<ITenant> implements OnIn
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['select', 'id', 'name', 'isChild', 'moveIn', 'moveOut'];
+  displayedColumns: string[] = ['select', 'id', 'name', 'isChild', 'moveIn', 'moveOut', 'flat'];
 
   constructor(tenantService: TenantService, private readonly _flatService: FlatService, public dialog: MatDialog) {
     super(tenantService, _flatService.crudHandler, TenantDetailComponent, dialog);
@@ -32,6 +34,4 @@ export class TenantComponent extends TableComponentBase<ITenant> implements OnIn
 
     this._init(this.paginator);
   }
-
-  
 }
